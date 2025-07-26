@@ -1,40 +1,51 @@
-# k8s-gitops
+# k8s
 
-# create resource group with name: aks-rg
-az group create --location eastus --name aks-rg
+# Login to Azure
+az login
+az account set --subscription=<subscriptionId>
+az account show
 
-# create AKS cluster with name: aks-cluster
-az aks create --name aks-cluster \
-              --resource-group aks-rg \
-              --node-count 1 \
-              --network-plugin azure \
-              --enable-managed-identity \
-              --generate-ssh-keys
+# Show existing resources
+az resource list
+
+# Create RG, ACR and AKS
+./infra/azcli/script.sh
+
+RESOURCE_GROUP="rg-onlinestore-dev-uksouth-001"
+AKS_NAME="aks-onlinestore-dev-uksouth-001"
+ACR_NAME="acronlinestoredevuksouth001"
 
 # connect to cluster
-az aks get-credentials --name aks-cluster --resource-group aks-rg
+az aks get-credentials --resource-group $(RESOURCE_GROUP) --name $(AKS_NAME)
 
-
-az aks get-credentials --resource-group rg-onlinestore-dev-uksouth-001 --name aks-onlinestore-dev-uksouth-001
-
-kubectl get ingress store-front 
-
-az group delete --name rg-onlinestore-dev-uksouth-001 --yes --no-wait
-
+# Short name for kubectl
 alias k=kubectl
+
+# Show all existing objects
+k get all
 
 # Log in to ACR
 az acr login --name $ACR_NAME
 
-# Tag and push your Docker image
-docker build -t order .
-docker tag order:latest $ACR_NAME.azurecr.io/order:v1
+# Tag and push the Docker images
+
+# Order Service
+docker build -t order ./app/order-service 
+docker tag order:v1 $ACR_NAME.azurecr.io/order:v1
 docker push $ACR_NAME.azurecr.io/order:v1
 
-docker build -t product .
-docker tag product:latest $ACR_NAME.azurecr.io/product:v1
+# Product Service
+docker build -t product ./app/product-service 
+docker tag product:v1 $ACR_NAME.azurecr.io/product:v1
 docker push $ACR_NAME.azurecr.io/product:v1
 
-docker build -t store-front .
-docker tag store-front:latest $ACR_NAME.azurecr.io/store-front:v1
+# Store Front Service
+docker build -t store-front ./app/store-front-service 
+docker tag store-front:v1 $ACR_NAME.azurecr.io/store-front:v1
 docker push $ACR_NAME.azurecr.io/store-front:v1
+
+# Deploy all the services using manifest files
+k apply -f ./manifests
+
+# Clean the Azure resources
+az group delete --name rg-onlinestore-dev-uksouth-001 --yes --no-wait
