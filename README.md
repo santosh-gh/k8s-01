@@ -1,15 +1,15 @@
 # k8s
 
 # Login to Azure
-az login
-az account set --subscription=<subscriptionId>
-az account show
+    az login
+    az account set --subscription=<subscriptionId>
+    az account show
 
 # Show existing resources
-az resource list
+    az resource list
 
 # Create RG, ACR and AKS
-./infra/azcli/script.sh
+    ./infra/azcli/script.sh
 
 # Variables
     RESOURCE_GROUP="rg-onlinestore-dev-uksouth-001"
@@ -17,16 +17,16 @@ az resource list
     ACR_NAME="acronlinestoredevuksouth001"
 
 # connect to cluster
-az aks get-credentials --resource-group $(RESOURCE_GROUP) --name $(AKS_NAME)
+    az aks get-credentials --resource-group $(RESOURCE_GROUP) --name $(AKS_NAME)
 
 # Short name for kubectl
-alias k=kubectl
+    alias k=kubectl
 
 # Show all existing objects
-k get all
+    k get all
 
 # Log in to ACR
-az acr login --name $ACR_NAME
+    az acr login --name $ACR_NAME
 
 # Tag and push the Docker images
 
@@ -46,7 +46,7 @@ az acr login --name $ACR_NAME
     docker push $ACR_NAME.azurecr.io/store-front:v1
 
 # Deploy all the services using manifest files
-k apply -f ./manifests
+    k apply -f ./manifests
 
 # Clean the Azure resources
-az group delete --name rg-onlinestore-dev-uksouth-001 --yes --no-wait
+    az group delete --name rg-onlinestore-dev-uksouth-001 --yes --no-wait
