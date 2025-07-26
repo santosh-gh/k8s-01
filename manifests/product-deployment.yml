@@ -19,9 +19,9 @@ spec:
           image: acronlinestoredevuksouth001.azurecr.io/product:v1
           ports:
             - containerPort: 3002
-          # env:
-          #   - name: AI_SERVICE_URL
-          #     value: "http://ai-service:5001/"
+          env:
+            - name: AI_SERVICE_URL
+              value: "http://ai-service:5001/"
           resources:
             requests:
               cpu: 1m
