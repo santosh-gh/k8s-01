@@ -30,17 +30,17 @@
 
 # Tag and push the Docker images
 
-# Order Service
+    # Order Service
     docker build -t order ./app/order-service 
     docker tag order:v1 $ACR_NAME.azurecr.io/order:v1
     docker push $ACR_NAME.azurecr.io/order:v1
 
-# Product Service
+    # Product Service
     docker build -t product ./app/product-service 
     docker tag product:v1 $ACR_NAME.azurecr.io/product:v1
     docker push $ACR_NAME.azurecr.io/product:v1
 
-# Store Front Service
+    # Store Front Service
     docker build -t store-front ./app/store-front-service 
     docker tag store-front:v1 $ACR_NAME.azurecr.io/store-front:v1
     docker push $ACR_NAME.azurecr.io/store-front:v1
