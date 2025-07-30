@@ -23,6 +23,9 @@ Prerequisites
 
     https://github.com/santosh-gh/k8s-01
 
+    image.png
+    
+
     ![alt text](image.png)
 
 # Login to Azure
