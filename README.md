@@ -1,6 +1,6 @@
-# k8s
+# Deeploying microservice applications in AKS using ACR for image repositories and K8S manifest files
 
-# Prerequisites
+Prerequisites
 
     A valid Azure subscription
 
@@ -9,7 +9,7 @@
     kubectl: https://kubernetes.io/docs/tasks/tools/
 
     bash shell: Most Linux/macOS systems already have this. For Windows, use Git Bash or WSL: https://www.atlassian.com/git/tutorials/git-bash
-    
+
     Docker Desktop for building and pushing images locally: https://docs.docker.com/desktop/
 
 # Login to Azure
