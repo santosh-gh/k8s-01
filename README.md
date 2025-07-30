@@ -1,4 +1,4 @@
-# Deeploying microservice applications in AKS using ACR for image repositories and K8S manifest files
+# Deploying microservice applications in AKS using ACR image repositories and K8S manifest files
 
 Prerequisites
 
