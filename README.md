@@ -22,9 +22,8 @@ Prerequisites
 # GitHub Repository
 
     https://github.com/santosh-gh/k8s-01
- 
 
-    ![Directory Structure](k8s01/image.png)
+    ![Directory Structure](https://github.com/santosh-gh/k8s-01/blob/main/image.png)    
 
 # Login to Azure
 
