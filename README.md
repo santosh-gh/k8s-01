@@ -24,7 +24,7 @@ Prerequisites
     https://github.com/santosh-gh/k8s-01
  
 
-    ![Directory Structure](./image.png)
+    ![Directory Structure](k8s01/image.png)
 
 # Login to Azure
 
