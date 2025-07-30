@@ -19,6 +19,12 @@ Prerequisites
 
     Docker Desktop for building and pushing images locally: https://docs.docker.com/desktop/
 
+# GitHub Repository
+
+    https://github.com/santosh-gh/k8s-01
+
+    ![alt text](image.png)
+
 # Login to Azure
 
     az login
