@@ -9,6 +9,8 @@ Prerequisites
 
     A valid Azure subscription
 
+    GitHub Repo : https://github.com/
+
     Azure CLI : https://learn.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
 
     kubectl: https://kubernetes.io/docs/tasks/tools/
