@@ -22,11 +22,9 @@ Prerequisites
 # GitHub Repository
 
     https://github.com/santosh-gh/k8s-01
+ 
 
-    image.png
-    
-
-    ![alt text](image.png)
+    ![Directory Structure](image.png)
 
 # Login to Azure
 
