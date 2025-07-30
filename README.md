@@ -1,4 +1,9 @@
-# Deploying microservice applications in AKS using ACR image repositories and K8S manifest files
+# Deploying microservice applications in AKS using 
+
+    Infra deploy: az cli in command line tool
+    Docker build and push images to ACR: docker in command line tool
+    k8s manifests: local directories
+    App deploy: kubectl in command line tool
 
 Prerequisites
 
