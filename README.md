@@ -1,5 +1,16 @@
 # Deploying microservice applications in AKS
 
+    A sample multi-container application with a group of microservices and web front ends that simulate a retail scenario.
+
+# Architesture
+
+![Store Architesture](aks-store-architecture.png)
+
+    # Store front: Web application for customers to view products and place orders.
+    # Product service: Shows product information.
+    # Order service: Places orders.
+    # RabbitMQ: Message queue for an order queue.
+
 # GitHub Repository (source code)
 
     https://github.com/santosh-gh/k8s-01 
@@ -27,10 +38,6 @@
     3. App deployment: k8s manifest files and kubectl command line tool
     4. Validate and Access the application
     5. Clean the Azure resources
-
-# Architesture
-
-![Store Architesture](aks-store-architecture.png)
 
 # Directory Structure
 ![Directory Structure](image.png)   
