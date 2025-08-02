@@ -64,11 +64,10 @@
 
         RESOURCE_GROUP="rg-onlinestore-dev-uksouth-001"
         AKS_NAME="aks-onlinestore-dev-uksouth-001"
-        az aks get-credentials --resource-group $(RESOURCE_GROUP) --name $(AKS_NAME)
+        az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_NAME
 
     # Short name for kubectl
 
-        alias k=kubectl
 
     # Show all existing objects
 
@@ -95,9 +94,11 @@
         docker push $ACR_NAME.azurecr.io/product:v1
 
         # Store Front Service
-        docker build -t store-front ./app/store-front-service 
+        docker build -t store-front ./app/store-front 
         docker tag store-front:latest $ACR_NAME.azurecr.io/store-front:v1
         docker push $ACR_NAME.azurecr.io/store-front:v1
+
+        docker images
 
 # App deployment
 
