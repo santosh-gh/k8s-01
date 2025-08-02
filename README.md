@@ -11,6 +11,10 @@
     # Product service: Shows product information.
     # Order service: Places orders.
     # RabbitMQ: Message queue for an order queue.
+
+# YouTube: 
+
+    https://youtu.be/zoJ7MMPVqFY    
  
 # GitHub Repository (source code)
 
