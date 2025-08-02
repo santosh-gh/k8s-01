@@ -16,13 +16,13 @@ az acr create --resource-group $RESOURCE_GROUP \
 
 
 # Create AKS cluster and attach ACR in one step
-az aks create \
-  --resource-group $RESOURCE_GROUP \
-  --name $AKS_NAME \
-  --node-count $NODE_COUNT \
-  --enable-managed-identity \
-  --attach-acr $ACR_NAME \
-  --generate-ssh-keys
+# az aks create \
+#   --resource-group $RESOURCE_GROUP \
+#   --name $AKS_NAME \
+#   --node-count $NODE_COUNT \
+#   --enable-managed-identity \
+#   --attach-acr $ACR_NAME \
+#   --generate-ssh-keys
 
 
 
