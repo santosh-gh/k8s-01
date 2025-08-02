@@ -1,4 +1,4 @@
-# Deploying microservice applications in AKS
+# Deploying microservice applications in AKS using comand line tools (AzCLI, Docker Desktop and kubectl)
 
     A sample multi-container application with a group of microservices and web front ends 
     that simulate a retail scenario.
