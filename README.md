@@ -1,102 +1,112 @@
-# Deploying microservice applications in AKS using 
+# Deploying microservice applications in AKS
 
-    Infra deploy: az cli in command line tool
-    Docker build and push images to ACR: docker in command line tool
-    k8s manifests: local directories
-    App deploy: kubectl in command line tool
+# GitHub Repository (source code)
 
-Prerequisites
+    https://github.com/santosh-gh/k8s-01 
+
+# Prerequisites
 
     A valid Azure subscription
 
-    GitHub Repo : https://github.com/
+    VS Code: https://code.visualstudio.com/download
 
-    Azure CLI : https://learn.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
+    GitHub Repo: https://github.com/
+
+    Azure CLI: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
 
     kubectl: https://kubernetes.io/docs/tasks/tools/
 
     bash shell: Most Linux/macOS systems already have this. For Windows, use Git Bash or WSL: https://www.atlassian.com/git/tutorials/git-bash
 
-    Docker Desktop for building and pushing images locally: https://docs.docker.com/desktop/
+    Docker Desktop: Building and pushing images locally: https://docs.docker.com/desktop/
 
+# Steps
 
+    1. Infra deployment: az cli command line tool
+    2. Build and push images to ACR: Docker Desktop command line tool
+    3. App deployment: k8s manifest files and kubectl command line tool
+    4. Validate and Access the application
+    5. Clean the Azure resources
 
-# GitHub Repository
+# Architesture
 
-    https://github.com/santosh-gh/k8s-01 
+![Store Architesture](aks-store-architecture.png)
 
 # Directory Structure
-![Directory Structure](image.png)
-   
+![Directory Structure](image.png)   
 
-# Login to Azure
+# Infra deployment
 
-    az login
-    az account set --subscription=<subscriptionId>
-    az account show
+    # Login to Azure
 
-# Show existing resources
+        az login
+        az account set --subscription=<subscriptionId>
+        az account show
 
-    az resource list
+    # Show existing resources
 
-# Create RG, ACR and AKS
+        az resource list
 
-    ./infra/azcli/script.sh
+    # Create RG, ACR and AKS
 
-# Variables
+        ./infra/azcli/script.sh
 
-    RESOURCE_GROUP="rg-onlinestore-dev-uksouth-001"
-    AKS_NAME="aks-onlinestore-dev-uksouth-001"
-    ACR_NAME="acronlinestoredevuksouth001"
+    # Connect to cluster
 
-# Connect to cluster
+        RESOURCE_GROUP="rg-onlinestore-dev-uksouth-001"
+        AKS_NAME="aks-onlinestore-dev-uksouth-001"
+        az aks get-credentials --resource-group $(RESOURCE_GROUP) --name $(AKS_NAME)
 
-    az aks get-credentials --resource-group $(RESOURCE_GROUP) --name $(AKS_NAME)
+    # Short name for kubectl
 
-# Short name for kubectl
+        alias k=kubectl
 
-    alias k=kubectl
+    # Show all existing objects
 
-# Show all existing objects
+        k get all
 
-    k get all
 
-# Log in to ACR
+# Build and push images to ACR
 
-    az acr login --name $ACR_NAME
+    # Log in to ACR
 
-# Build and push the Docker images to ACR
+        ACR_NAME="acronlinestoredevuksouth001"
+        az acr login --name $ACR_NAME
 
-    # Order Service
-    docker build -t order ./app/order-service 
-    docker tag order:v1 $ACR_NAME.azurecr.io/order:v1
-    docker push $ACR_NAME.azurecr.io/order:v1
+    # Build and push the Docker images to ACR
 
-    # Product Service
-    docker build -t product ./app/product-service 
-    docker tag product:v1 $ACR_NAME.azurecr.io/product:v1
-    docker push $ACR_NAME.azurecr.io/product:v1
+        # Order Service
+        docker build -t order ./app/order-service 
+        docker tag order:v1 $ACR_NAME.azurecr.io/order:v1
+        docker push $ACR_NAME.azurecr.io/order:v1
 
-    # Store Front Service
-    docker build -t store-front ./app/store-front-service 
-    docker tag store-front:v1 $ACR_NAME.azurecr.io/store-front:v1
-    docker push $ACR_NAME.azurecr.io/store-front:v1
+        # Product Service
+        docker build -t product ./app/product-service 
+        docker tag product:v1 $ACR_NAME.azurecr.io/product:v1
+        docker push $ACR_NAME.azurecr.io/product:v1
 
-# Write Kubernetes YAML Manifests for the applicatons
+        # Store Front Service
+        docker build -t store-front ./app/store-front-service 
+        docker tag store-front:v1 $ACR_NAME.azurecr.io/store-front:v1
+        docker push $ACR_NAME.azurecr.io/store-front:v1
 
-    configmap.yml
-    order-deployment.yml
-    order-service.yml
-    product-deployment.yml
-    product-service.yml
-    store-front-deployment.yml
-    store-front-service.yml
-    rabbitmq-deployment.yml
-    rabbitmq-service.yml
+# App deployment
 
-# Deploy the services to AKS using kubectl and manifest files
+    # Kubernetes YAML Manifests for the applicatons
 
-    k apply -f ./manifests
+        configmap.yml
+        order-deployment.yml
+        order-service.yml
+        product-deployment.yml
+        product-service.yml
+        store-front-deployment.yml
+        store-front-service.yml
+        rabbitmq-deployment.yml
+        rabbitmq-service.yml
+
+    # Deploy the services to AKS using kubectl and manifest files
+
+        k apply -f ./manifests
 
 # Verify the Deployment
 
