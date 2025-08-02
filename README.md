@@ -1,6 +1,7 @@
 # Deploying microservice applications in AKS
 
-    A sample multi-container application with a group of microservices and web front ends that simulate a retail scenario.
+    A sample multi-container application with a group of microservices and web front ends 
+    that simulate a retail scenario.
 
 # Architesture
 
@@ -27,7 +28,8 @@
 
     kubectl: https://kubernetes.io/docs/tasks/tools/
 
-    bash shell: Most Linux/macOS systems already have this. For Windows, use Git Bash or WSL: https://www.atlassian.com/git/tutorials/git-bash
+    bash shell: Most Linux/macOS systems already have this. 
+    For Windows, use Git Bash or WSL: https://www.atlassian.com/git/tutorials/git-bash
 
     Docker Desktop: Building and pushing images locally: https://docs.docker.com/desktop/
 
