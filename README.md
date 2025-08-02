@@ -121,6 +121,8 @@
 
     k get pods
     k get services
+
+    curl publicIp
     Browse the app using http://<LoadBalancer public IP>:80
 
 # Clean the Azure resources
