@@ -1,7 +1,17 @@
-# Deploying microservice applications in AKS using comand line tools (AzCLI, Docker Desktop and kubectl)
+# Deploying microservice applications in AKS using Azure DevOps and Helm
 
     A sample multi-container application with a group of microservices and web front ends 
     that simulate a retail scenario.
+
+    Part1 (Manual Deployment using comand line tools):
+    AzCLI, Docker Desktop and kubectl: https://github.com/santosh-gh/k8s-01
+    YouTube: https://youtu.be/zoJ7MMPVqFY
+
+    Part2 (Automated Deployment using Azure DevOps Pipeline): https://github.com/santosh-gh/k8s-02
+    YouTube: https://youtu.be/nnomaZVHg9I
+
+    Part3 (Automated Infra Deployment using Bicep and Azure DevOps Pipeline): https://github.com/santosh-gh/k8s-03
+    YouTube: https://youtu.be/nnomaZVHg9I
 
 # Architesture
 
@@ -12,41 +22,38 @@
     # Order service: Places orders.
     # RabbitMQ: Message queue for an order queue.
 
+# Directory Structure
+
+![Directory Structure](image.png) 
+
 # YouTube: 
 
     https://youtu.be/zoJ7MMPVqFY    
  
 # GitHub Repository (source code)
 
-    https://github.com/santosh-gh/k8s-01 
+    https://github.com/santosh-gh/k8s-04
 
-# Prerequisites
 
-    A valid Azure subscription
+# Deploying microservice applications in AKS using 
 
-    VS Code: https://code.visualstudio.com/download
+    Infra deploy: using command line AzCLI/Bicep
 
-    GitHub Repo: https://github.com/
+    Docker build and push images to ACR: Docker Desktop command line
 
-    Azure CLI: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
+    App Deploymnet: Helm command
 
-    kubectl: https://kubernetes.io/docs/tasks/tools/
-
-    bash shell: Most Linux/macOS systems already have this. 
-    For Windows, use Git Bash or WSL: https://www.atlassian.com/git/tutorials/git-bash
-
-    Docker Desktop: Building and pushing images locally: https://docs.docker.com/desktop/
+    Helmchart: Use helm command 
+    helm install store-release ./helmchart
 
 # Steps
 
-    1. Infra deployment: az cli command line tool
-    2. Build and push images to ACR: Docker Desktop command line tool
-    3. App deployment: k8s manifest files and kubectl command line tool
-    4. Validate and Access the application
-    5. Clean the Azure resources
-
-# Directory Structure
-![Directory Structure](image.png)   
+    1. Infra deployment using AzCLI/Bicep
+    2. Build and push images to ACR: Docker
+    3. Helm install and Helmfy
+    4. App deployment: helm install store-release ./helmchart
+    5. Validate and Access the application
+    6. Clean the Azure resources
 
 # Infra deployment
 
@@ -62,7 +69,13 @@
 
     # Create RG, ACR and AKS
 
+        # AzCLI
         ./infra/azcli/script.sh
+
+        OR
+
+        # Bicep
+        az deployment sub create --location uksouth --template-file ./infra/bicep/main.bicep --parameters ./infra/bicep/main.bicepparam
 
     # Connect to cluster
 
@@ -72,13 +85,11 @@
 
     # Short name for kubectl
 
-
     # Show all existing objects
 
         k get all
 
-
-# Build and push images to ACR
+# Docker Build and Push
 
     # Log in to ACR
 
@@ -104,29 +115,20 @@
 
         docker images
 
-# App deployment
+# Helm and Helmify
 
-    # Kubernetes YAML Manifests for the applicatons
+    # helmify 
 
-        configmap.yml
-        order-deployment.yml
-        order-service.yml
-        product-deployment.yml
-        product-service.yml
-        store-front-deployment.yml
-        store-front-service.yml
-        rabbitmq-deployment.yml
-        rabbitmq-service.yml
+    helmify -f ./manifests helmchart
 
-    # Deploy the services to AKS using kubectl and manifest files
+    # Helm Deploy
 
-        k apply -f ./manifests
+    helm install store-release ./helmchart
 
 # Verify the Deployment
 
     k get pods
     k get services
-
     curl <LoadBalancer public IP>:80
     Browse the app using http://<LoadBalancer public IP>:80
 
